@@ -1,2 +1,2 @@
 # py_many-species
-Simple and difficult solutions in python language
+Simple and difficult solutions in Python language
