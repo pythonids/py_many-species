@@ -1,0 +1,54 @@
+apiVersion: newVersion1
+kind: Deployment
+metadata:
+  name: mynginx
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: mynginx
+  template:
+    metadata:
+      labels:
+        app: mynginx
+        version: v1.0.0
+    spec:
+      containers:
+      - image: szamandevexecpl/nginx
+        name: szamandevexecpl-nginx
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: 500m
+            memory: 128Mi
+---
+apiVersion: newVersion1
+kind: Service
+metadata:
+  name: mynginx
+spec:
+  ports:
+  - port: 5432
+    targetPort: 80
+  selector:
+    app: mynginx
+---
+apiVersion: newVersion1
+kind: Ingress
+metadata:
+  labels:
+    name: mynginx
+  name: mynginx
+spec:
+  rules:
+  - host: localhost
+    http:
+      paths:
+      - backend:
+          service:
+            name: mynginx
+            port:
+              number: 5432
+        path: /
+        pathType: Prefix
