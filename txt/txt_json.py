@@ -5,9 +5,14 @@ import json
 
 
 def openJson():
-    with open("files/test.json", encoding="UTF-8") as test_file:
-        data = json.load(test_file)
-        changeConfig(data)
+    try:
+        with open("files/test.json", encoding="UTF-8") as test_file:
+            data = json.load(test_file)
+            changeConfig(data)
+    except FileNotFoundError:
+        print("err: open - file not found")
+    except json.decoder.JSONDecodeError:
+        print("err: open - json decode")
 
 
 def changeConfig(data):
@@ -16,8 +21,12 @@ def changeConfig(data):
 
 
 def saveJson(file):
-    with open("files/out_test.json", "w", encoding="UTF-8") as out_file:
-        json.dump(file, out_file, ensure_ascii=False)
+    try:
+        with open("files/out_test.json", "w", encoding="UTF-8") as out_file:
+            json.dump(file, out_file, ensure_ascii=False)
+            print("ok: file saved")
+    except FileNotFoundError:
+        print("err: save - file not found")
 
 
 openJson()
