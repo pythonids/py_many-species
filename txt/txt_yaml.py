@@ -7,10 +7,10 @@ import yaml
 
 
 def openYaml(n):
-    open("out_test.yaml", "w")
+    open("files/out_test.yaml", "w")
 
     # test.yaml - k8s sample configuration
-    with open(r'test.yaml') as test_file:
+    with open(r'files/test.yaml') as test_file:
         # yaml.FullLoader - conversion from YAML to dictionary
         i = 0
         for data in yaml.load_all(test_file, Loader=yaml.FullLoader):
@@ -24,7 +24,7 @@ def changeConfig(data):
 
 
 def saveYaml(file, i, n):
-    with open(r'out_test.yaml', 'a') as out_file:
+    with open(r'files/out_test.yaml', 'a') as out_file:
         if i < n:
             yaml.dump(file, out_file)
             if i < n - 1:
