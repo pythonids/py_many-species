@@ -19,8 +19,12 @@ def openJson():
 
 
 def changeConfig(data):
-    data["test1"]["value"] = "Bonjour le monde"
-    return data
+    try:
+        data["test1"]["value"] = "Bonjour le monde"
+    except TypeError:
+        data = {}
+    finally:
+        return data
 
 
 def saveJson(file):
