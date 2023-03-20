@@ -3,15 +3,18 @@
 
 # https://pyyaml.org/wiki/PyYAMLDocumentation
 # pip install pyyaml
+
+# python txt_json.py
+
 import yaml
 
 
 def openYaml(n):
-    open("files/out_test.yaml", "w")
+    open("files/out.yaml", "w")
 
     # test.yaml - k8s sample configuration
     try:
-        with open(r'files/test.yaml') as test_file:
+        with open(r'files/in.yaml') as test_file:
             # yaml.FullLoader - conversion from YAML to dictionary
             i = 0
             for data in yaml.load_all(test_file, Loader=yaml.FullLoader):
@@ -26,11 +29,12 @@ def openYaml(n):
 
 def changeConfig(data):
     data['apiVersion'] = "newVersion1"
+    return data
 
 
 def saveYaml(file, i, n):
     try:
-        with open(r'files/out_test.yaml', 'a') as out_file:
+        with open(r'files/out.yaml', 'a') as out_file:
             if i < n:
                 yaml.dump(file, out_file)
                 print("ok: file saved")
