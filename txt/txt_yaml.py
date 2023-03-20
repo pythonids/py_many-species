@@ -28,8 +28,12 @@ def openYaml(n):
 
 
 def changeConfig(data):
-    data['apiVersion'] = "newVersion1"
-    return data
+    try:
+        data['apiVersion'] = "newVersion1"
+    except TypeError:
+        data = {}
+    finally:
+        return data
 
 
 def saveYaml(file, i, n):
