@@ -12,20 +12,7 @@ jobs:
       - run:
           name: Run tests for "txt"
           command: python -m unittest discover txt "*_test.py"
-  deploy:
-    machine:
-        image: ubuntu-2004:current
-    steps:
-        - run:
-            name: Deploy Over SSH
-            command: ssh $SSH_USER@$SSH_HOST "touch 'test.txt'"
 workflows:
   firts:
     jobs:
       - build-and-test
-      - deploy:
-          requires:
-            - build-and-test
-          filters:
-            branches:
-                only: develop
