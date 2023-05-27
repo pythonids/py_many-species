@@ -20,6 +20,4 @@ jobs:
           username: ${{ secrets.AWS_USER }}
           key: ${{ secrets.AWS_KEY }}
           script: |
-            git config --global url."https://oauth2:${{ secrets.GITHUB_TOKEN }}@github.com".insteadOf https://github.com
-            ssh -T git@github.com
-            git clone git@github.com:pythonids/py_many-species.git py_many-species
+            git clone https://oauth2:${{ secrets.GITHUB_TOKEN }}@github.com/pythonids/py_many-species.git py_many-species
