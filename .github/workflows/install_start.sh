@@ -37,13 +37,10 @@ install(){
 }
 
 run(){
-    local npm_prefix=$(npm config get prefix)
-    export PATH=$PATH:$npm_prefixbin/pm2
-    pm2 status
     echo "\n \n ### RUN RELEASE ${TAG} ### \n \n"
     cd py_many_species_$TAG
     ls -la
-    #install
+    install
     if [ $? -eq 0 ]; then
         reloadApp
     fi

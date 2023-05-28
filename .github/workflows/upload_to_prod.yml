@@ -1,4 +1,4 @@
-name: Upload to PROD
+name: Deploy to PROD
 
 on:
   push:
@@ -9,11 +9,11 @@ on:
 
 jobs:
   deploy:
-    name: Deploy
+    name: Deploy to PROD
     runs-on: ubuntu-latest
 
     steps:
-      - name: clone, install and start app
+      - name: clone repo
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.AWS_HOST }}
@@ -22,4 +22,26 @@ jobs:
           script_stop: true
           script: |
             git clone https://oauth2:${{ secrets.GITHUB_TOKEN }}@github.com/pythonids/py_many-species.git py_many_species_${{ github.ref_name }}
-            sh py_many_species_${{ github.ref_name }}/.github/workflows/install_start.sh -t "${{ github.ref_name }}"
+
+      - name: install app
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.AWS_HOST }}
+          username: ${{ secrets.AWS_USER }}
+          key: ${{ secrets.AWS_KEY }}
+          script_stop: true
+          script: |
+            cd py_many_species_${{ github.ref_name }}
+            ls -la
+            npm --version
+
+      - name: del and start app
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.AWS_HOST }}
+          username: ${{ secrets.AWS_USER }}
+          key: ${{ secrets.AWS_KEY }}
+          script_stop: true
+          script: |
+            cd py_many_species_${{ github.ref_name }}
+            pm2 status
