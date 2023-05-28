@@ -22,4 +22,4 @@ jobs:
           script_stop: true
           script: |
             git clone https://oauth2:${{ secrets.GITHUB_TOKEN }}@github.com/pythonids/py_many-species.git py_many_species_${{ github.ref_name }}
-            sh install_start.sh -t "${{ github.ref_name }}"
+            sh py_many_species_${{ github.ref_name }}/.github/workflows/install_start.sh -t "${{ github.ref_name }}"
