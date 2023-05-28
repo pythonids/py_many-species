@@ -8,9 +8,9 @@ done
 startApp(){
     pm2 start app.js -i 1
     if [ $? -eq 0 ]; then
-        echo "\n ### START APP - OK ### \n \n"
+        echo "\n ### START RELEASE ${TAG} - SUCCESS ### \n \n"
     else
-        echo "\n ### START APP - FAIL ### \n \n"
+        echo "\n ### START RELEASE ${TAG} - FAILURE ### \n \n"
         exit 1
     fi
 }
@@ -37,7 +37,9 @@ install(){
 }
 
 run(){
+    echo "\n ### RUN RELEASE ${TAG} ### \n \n"
     cd py_many_species_$TAG
+    ls -la
     #install
     if [ $? -eq 0 ]; then
         reloadApp
