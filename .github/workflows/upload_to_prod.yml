@@ -1,0 +1,25 @@
+name: Upload to PROD
+
+on:
+  push:
+    tags:
+    - "*"
+
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: clone, install and start app
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.AWS_HOST }}
+          username: ${{ secrets.AWS_USER }}
+          key: ${{ secrets.AWS_KEY }}
+          script_stop: true
+          script: |
+            git clone https://oauth2:${{ secrets.GITHUB_TOKEN }}@github.com/pythonids/py_many-species.git py_many_species_${{ github.ref_name }}
+            sh install_start.sh -t "${{ github.ref_name }}"
