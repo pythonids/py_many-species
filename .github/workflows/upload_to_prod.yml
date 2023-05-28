@@ -45,5 +45,7 @@ jobs:
           key: ${{ secrets.AWS_KEY }}
           script_stop: true
           script: |
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
             cd py_many_species_${{ github.ref_name }}
             pm2 status
