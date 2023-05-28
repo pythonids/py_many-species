@@ -37,14 +37,14 @@ install(){
 }
 
 run(){
+    export PATH=$PATH:/home/ubuntu/.nvm/versions/node/v18.16.0/bin/pm2
+    pm2 status
     echo "\n ### RUN RELEASE ${TAG} ### \n \n"
     cd py_many_species_$TAG
     ls -la
     #install
     if [ $? -eq 0 ]; then
-        echo "pm2 version:"
-        pm2 --version
-        #reloadApp
+        reloadApp
     fi
 }
 
