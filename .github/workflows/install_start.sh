@@ -42,7 +42,9 @@ run(){
     ls -la
     #install
     if [ $? -eq 0 ]; then
-        reloadApp
+        echo "pm2 version:"
+        pm2 --version
+        #reloadApp
     fi
 }
 
