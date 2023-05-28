@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: clone repo
+      - name: Clone tag from repo
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.AWS_HOST }}
@@ -23,7 +23,7 @@ jobs:
           script: |
             git clone https://oauth2:${{ secrets.GITHUB_TOKEN }}@github.com/pythonids/py_many-species.git py_many_species_${{ github.ref_name }}
 
-      - name: install app
+      - name: Install app
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.AWS_HOST }}
@@ -38,7 +38,7 @@ jobs:
             npm --version
             # npm install .
 
-      - name: del and start app
+      - name: Del and start app
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.AWS_HOST }}
