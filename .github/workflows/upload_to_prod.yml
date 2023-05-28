@@ -36,6 +36,7 @@ jobs:
             cd py_many_species_${{ github.ref_name }}
             ls -la
             npm --version
+            # npm install .
 
       - name: del and start app
         uses: appleboy/ssh-action@master
@@ -48,4 +49,6 @@ jobs:
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
             cd py_many_species_${{ github.ref_name }}
+            # pm2 delete myApp
+            # pm2 start npm --name "myApp" -- run "start:production"
             pm2 status
